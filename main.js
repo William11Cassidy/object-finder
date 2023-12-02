@@ -16,8 +16,8 @@ function draw() {
             noFill()
             stroke("green")
             rect(objects[i].x, objects[i].y, objects[i].width, objects[i].height)
-            if (objects[i].label=="person") {
-            document.getElementById("status").innerHTML = "status: baby detected "
+            if (objects[i].label==item) {
+            document.getElementById("status").innerHTML = "status: "+item+" found"
             }
         }
     }
@@ -27,8 +27,6 @@ function setup() {
     canvas.center()
     video=createCapture(VIDEO)
     video.hide()
-    objectDetector = ml5.objectDetector("cocossd", modelloaded)
-    document.getElementById("status").innerHTML = "status: detecting objects "
 }
 function modelloaded() {
     status = true
@@ -42,4 +40,10 @@ function gotResult(error, result) {
         console.log(result);
         objects = result
     }
+}
+
+function start(){
+    item=document.getElementById("item").value
+    objectDetector = ml5.objectDetector("cocossd", modelloaded)
+    document.getElementById("status").innerHTML = "status: detecting objects "
 }
